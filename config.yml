@@ -10,13 +10,29 @@ http:
       middlewares:
         - https-redirect-scheme
         - default-headers
-
+    traefik:
+      entryPoints:
+        - "https"
+      rule: "Host(`traefik2.freelancingspot.com`)"
+      service: traefik_service
+      tls: true
+      middlewares:
+        - https-redirect-scheme
+        - default-headers
   services:
     blog_service:
       loadBalancer:
         servers:
           - url: "http://ghost:2368"
         passHostHeader: true
+    
+    traefik_service:
+      loadBalancer:
+        servers:
+          - url: "https://localhost:8080"
+        passHostHeader: true
+
+
 
   middlewares:
     https-redirect-scheme:
