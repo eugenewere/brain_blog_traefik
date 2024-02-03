@@ -17,8 +17,6 @@ http:
           - url: "http://ghost:2368"
         passHostHeader: true
 
-   
-    
 
   middlewares:
     https-redirect-scheme:
