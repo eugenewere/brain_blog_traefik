@@ -1,0 +1,48 @@
+version: '2'
+services:
+
+  traefik:
+    image: traefik:latest
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/traefik.yml:ro
+      - ./acme.json:/acme.json
+      - ./config.yml:/config.yml:ro
+    networks:
+      - proxy
+    environment:
+      - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi
+    restart: unless-stopped
+    container_name: traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.entrypoints=http"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.traefik.rule=Host(`traefik1.freelancingspot.com`)"
+      - "traefik.http.routers.traefik.service=traefik"
+      - "traefik.http.services.traefik.loadBalancer.server.url=http://localhost:8080"  
+      - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
+      - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+
+
+      - "traefik.http.routers.traefik-secure.entrypoints=https"
+      - "traefik.http.routers.traefik-secure.rule=Host(`traefik1.freelancingspot.com`)"
+      - "traefik.http.routers.traefik-secure.tls=true"
+      - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].main=freelancingspot.com"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.freelancingspot.com"
+      - "traefik.http.routers.traefik-secure.service=api@internal"
+  
+  
+
+networks:
+  proxy:
+    external: true
