@@ -9,10 +9,6 @@ services:
       - "80:80"
       - "443:443"
       - "8080:8080"
-    dns:
-      - 10.218.0.2
-      - 1.1.1.1
-      - 1.0.0.1
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
