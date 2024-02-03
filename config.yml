@@ -6,16 +6,16 @@ http:
         - "https"
       rule: "Host(`freelancingspot.com`)"
       service: blog_service
-      tls: true
+      tls: {}
       middlewares:
         - https-redirect-scheme
         - default-headers
-    traefik:
+    portainer:
       entryPoints:
         - "https"
-      rule: "Host(`traefik2.freelancingspot.com`)"
-      service: traefik_service
-      tls: true
+      rule: "Host(`portainer.freelancingspot.com`)"
+      service: portainer_service
+      tls: {}
       middlewares:
         - https-redirect-scheme
         - default-headers
@@ -26,10 +26,10 @@ http:
           - url: "http://ghost:2368"
         passHostHeader: true
     
-    traefik_service:
+    portainer_service:
       loadBalancer:
         servers:
-          - url: "https://localhost:8080"
+          - url: "https://10.218.0.2:9443"
         passHostHeader: true
 
 
