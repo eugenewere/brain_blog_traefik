@@ -38,4 +38,4 @@ certificatesResolvers:
           - "1.0.0.1:53"
 
 log:
-  level: "INFO"
+  level: "DEBUG"
