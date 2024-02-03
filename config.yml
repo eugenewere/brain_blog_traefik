@@ -2,7 +2,6 @@ http:
   routers:
     blog:
       entryPoints:
-        - "http"
         - "https"
       rule: "Host(`freelancingspot.com`)"
       service: blog_service
@@ -10,6 +9,7 @@ http:
       middlewares:
         - https-redirect-scheme
         - default-headers
+
     portainer:
       entryPoints:
         - "https"
