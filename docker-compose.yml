@@ -16,7 +16,7 @@ services:
       - ./acme.json:/acme.json
       - ./config.yml:/config.yml:ro
     networks:
-      - proxy
+      - blog_ghost_nw
     environment:
       - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi
     restart: unless-stopped
@@ -44,5 +44,5 @@ services:
   
 
 networks:
-  proxy:
+  blog_ghost_nw:
     external: true
