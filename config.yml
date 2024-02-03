@@ -24,13 +24,13 @@ http:
     blog_service:
       loadBalancer:
         servers:
-          - url: "http://10.218.0.2:2368"
+          - url: "http://10.218.0.2:2368/"
         passHostHeader: true
     
     portainer_service:
       loadBalancer:
         servers:
-          - url: "https://10.218.0.2:9443"
+          - url: "https://10.218.0.2:9443/"
         passHostHeader: true
 
 
