@@ -14,7 +14,7 @@ http:
     blog_service:
       loadBalancer:
         servers:
-          - url: "http://blog:2368"
+          - url: "http://ghost:2368"
         passHostHeader: true
 
    
