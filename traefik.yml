@@ -36,5 +36,5 @@ certificatesResolvers:
           - "1.1.1.1:53"
           - "1.0.0.1:53"
 
-# log:
-#   level: "DEBUG"
+log:
+  level: "DEBUG"
