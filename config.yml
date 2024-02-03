@@ -9,7 +9,7 @@ http:
       tls: {}
       middlewares:
         - https-redirect-scheme
-        # - default-headers
+        - default-headers
 
   services:
     blog_service:
