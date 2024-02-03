@@ -2,13 +2,14 @@ http:
   routers:
     blog:
       entryPoints:
+        - "http"
         - "https"
-      rule: "Host(`freelancingspot.com`) || Host(`freelancingspot.com`)"
+      rule: "Host(`freelancingspot.com`)"
       service: blog_service
       tls: {}
       middlewares:
         - https-redirect-scheme
-        - default-headers
+        # - default-headers
 
   services:
     blog_service:
