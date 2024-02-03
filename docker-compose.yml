@@ -25,7 +25,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
       - "traefik.docker.network=blog_ghost_nw"
-      - "traefik.http.routers.traefik.rule=Host(`traefik1.freelancingspot.com`)"
+      - "traefik.http.routers.traefik.rule=Host(`traefik1.freelancingspot.com`) || Host(`traefik1.freelancingspot.com`)"
       - "traefik.http.routers.traefik.service=traefik"
       - "traefik.http.services.traefik.loadBalancer.server.url=http://localhost:8080"  
       - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
@@ -34,7 +34,7 @@ services:
 
 
       - "traefik.http.routers.traefik-secure.entrypoints=https"
-      - "traefik.http.routers.traefik-secure.rule=Host(`traefik1.freelancingspot.com`)"
+      - "traefik.http.routers.traefik-secure.rule=Host(`traefik1.freelancingspot.com`) || Host(`traefik1.freelancingspot.com`)"
       - "traefik.http.routers.traefik-secure.tls=true"
       - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
       - "traefik.http.routers.traefik-secure.tls.domains[0].main=freelancingspot.com"
