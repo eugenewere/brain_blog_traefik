@@ -1,0 +1,9 @@
+blog.adapty.io {
+	redir https://freelancingspot.com
+}
+adapty.io {
+	reverse_proxy / ghost:2368 {
+		#proxy to Ghost container
+		header_up Host {host}
+	}
+}
