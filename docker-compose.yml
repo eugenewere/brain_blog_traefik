@@ -24,7 +24,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
-      - "traefik.docker.network=proxy"
+      - "traefik.docker.network=blog_ghost_nw"
       - "traefik.http.routers.traefik.rule=Host(`traefik1.freelancingspot.com`)"
       - "traefik.http.routers.traefik.service=traefik"
       - "traefik.http.services.traefik.loadBalancer.server.url=http://localhost:8080"  
