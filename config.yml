@@ -3,6 +3,7 @@ http:
     blog:
       entryPoints:
         - "https"
+        - "http"
       rule: "Host(`freelancingspot.com`) || Host(`www.freelancingspot.com`)"
       service: blog_service
       tls: {}
