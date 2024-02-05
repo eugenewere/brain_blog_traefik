@@ -2,7 +2,7 @@
 	email bestonlinebs@gmail.com
 }
 
-freelancingspot.com {
+www.freelancingspot.com  freelancingspot.com {
 	reverse_proxy http://ghost:2368
 	tls {
         dns cloudflare {env.CF_API_TOKEN}
