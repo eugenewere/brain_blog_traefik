@@ -3,12 +3,13 @@ services:
   caddy:
     image: caddy:2
     restart: unless-stopped
+    networks:
+      - blog_ghost_nw
     ports:
     - "80:80"
     - "443:443"
     volumes:
     - $PWD/Caddyfile:/etc/caddy/Caddyfile
-    - $PWD/site:/srv
     - caddy_data:/data
     - caddy_config:/config
   # traefik:
