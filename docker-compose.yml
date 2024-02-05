@@ -1,57 +1,57 @@
 version: '2'
 services:
-  # caddy:
-  #   image: caddy:2
-  #   restart: unless-stopped
-  #   ports:
-  #   - "80:80"
-  #   - "443:443"
-  #   volumes:
-  #   - $PWD/Caddyfile:/etc/caddy/Caddyfile
-  #   - $PWD/site:/srv
-  #   - caddy_data:/data
-  #   - caddy_config:/config
-  traefik:
-    image: traefik:latest
-    container_name: traefik
-    security_opt:
-      - no-new-privileges:true
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
-    # dns:
-    #   - 10.10.4.100
-    #   - 1.1.1.1
-    #   - 1.0.0.1
+    - "80:80"
+    - "443:443"
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik.yml:/traefik.yml:ro
-      - ./acme.json:/acme.json
-      - ./config.yml:/config.yml:ro
-    networks:
-      - blog_ghost_nw
-    environment:
-      - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi
-    restart: unless-stopped    
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.traefik.entrypoints=http"
-      - "traefik.http.routers.traefik.rule=Host(`traefik1.freelancingspot.com`)"
-      - "traefik.http.routers.traefik.service=traefik"
-      - "traefik.http.services.traefik.loadBalancer.server.url=http://localhost:8080"  
-      - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
-      - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+    - $PWD/Caddyfile:/etc/caddy/Caddyfile
+    - $PWD/site:/srv
+    - caddy_data:/data
+    - caddy_config:/config
+  # traefik:
+  #   image: traefik:latest
+  #   container_name: traefik
+  #   security_opt:
+  #     - no-new-privileges:true
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #     - "8080:8080"
+  #   dns:
+  #     - 10.218.0.2
+  #     - 1.1.1.1
+  #     - 1.0.0.1
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - ./traefik.yml:/traefik.yml:ro
+  #     - ./acme.json:/acme.json
+  #     - ./config.yml:/config.yml:ro
+  #   networks:
+  #     - blog_ghost_nw
+  #   environment:
+  #     - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi
+  #   restart: unless-stopped    
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.traefik.entrypoints=http"
+  #     - "traefik.http.routers.traefik.rule=Host(`traefik1.freelancingspot.com`)"
+  #     - "traefik.http.routers.traefik.service=traefik"
+  #     - "traefik.http.services.traefik.loadBalancer.server.url=http://localhost:8080"  
+  #     - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
+  #     - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
+  #     - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
 
-      - "traefik.http.routers.traefik-secure.entrypoints=https"
-      - "traefik.http.routers.traefik-secure.rule=Host(`traefik1.freelancingspot.com`)"
-      - "traefik.http.routers.traefik-secure.tls=true"
-      - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
-      - "traefik.http.routers.traefik-secure.tls.domains[0].main=freelancingspot.com"
-      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.freelancingspot.com"
-      - "traefik.http.routers.traefik-secure.service=api@internal"
+  #     - "traefik.http.routers.traefik-secure.entrypoints=https"
+  #     - "traefik.http.routers.traefik-secure.rule=Host(`traefik1.freelancingspot.com`)"
+  #     - "traefik.http.routers.traefik-secure.tls=true"
+  #     - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
+  #     - "traefik.http.routers.traefik-secure.tls.domains[0].main=freelancingspot.com"
+  #     - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.freelancingspot.com"
+  #     - "traefik.http.routers.traefik-secure.service=api@internal"
 
 networks:
   blog_ghost_nw:
