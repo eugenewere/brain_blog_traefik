@@ -5,6 +5,9 @@ services:
     restart: unless-stopped
     networks:
       - blog_ghost_nw
+    environment:
+      - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi
+      - CF_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi
     ports:
     - "80:80"
     - "443:443"
