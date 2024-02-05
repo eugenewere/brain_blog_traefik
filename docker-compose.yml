@@ -2,7 +2,7 @@ version: '2'
 services:
   caddy:
     # image: caddy:2
-    build: ./Dockerfile
+    build: $PWD/Dockerfile
     restart: unless-stopped
     networks:
       - blog_ghost_nw
