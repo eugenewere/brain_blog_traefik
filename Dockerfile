@@ -1,10 +1,9 @@
-FROM php:8.1-cli AS build-env
-COPY --chown=www:www . /var/www/html
-WORKDIR /var/www/html
+FROM caddy:2.4.6
 
-# Perform some other build steps, like "npm run prod" and "composer install"
+RUN caddy-builder \
+    github.com/caddy-dns/cloudflare
 
-FROM roelofjanelsinga/caddy-cloudflare:latest
+FROM caddy:2.4.6
 
-COPY --from=build-env /var/www/html /var/www/html
+COPY --from=0 /usr/bin/caddy /usr/bin/caddy
 COPY ./Caddyfile /etc/caddy/Caddyfile
