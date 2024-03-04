@@ -1,0 +1,37 @@
+{
+    "url": "cryptotradinginfo.com",
+    "server": {
+        "port": 2368,
+        "host": "0.0.0.0"
+    },
+    "admin": {
+        "url": "https://cryptotradinginfo.com"
+    },
+    "database": {
+        "client": "mysql",
+        "connection": {
+            "host": "mysql",
+            "port": 3306,
+            "user": "itara",
+            "password": "abcd@123",
+            "database": "ghostdata",
+            "charset": "utf8mb4"
+        }
+    },
+    "mail": {
+        "from": "'cryptotradinginfo' <info@cryptotradinginfo.com>",
+        "transport": "SMTP",
+        "logger": true,
+        "options": {
+            "host": "smtp.gmail.com",
+            "port": 587,
+            "secureConnection": false,
+            "auth": {
+                "user": "vincentodima19@gmail.com",
+                "pass": "hzofwwykhvyvhkpz"
+            }
+        }
+    }
+
+
+}

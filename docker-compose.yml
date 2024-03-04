@@ -5,66 +5,73 @@ services:
     build: .
     restart: unless-stopped
     networks:
-      - blog_ghost_nw
+      - ghost_nw
     environment:
       # - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi # brian
       - CF_DNS_API_TOKEN=QbfvWvPPopGOzdJivhDd4zv3zfo-t4MSnN_Y-WxN  # vincent
       # - CF_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi # brian
       - CF_API_TOKEN=QbfvWvPPopGOzdJivhDd4zv3zfo-t4MSnN_Y-WxN  #vincent
     ports:
-    - "80:80"
-    - "443:443"
+      - "80:80"
+      - "443:443"
     volumes:
-    # - $PWD/Caddyfile:/etc/caddy/Caddyfile #brian
-    - $PWD/Caddyfile_vincent:/etc/caddy/Caddyfile #vincent
-    - caddy_data:/data
-    - caddy_config:/config
-  # traefik:
-  #   image: traefik:latest
-  #   container_name: traefik
-  #   security_opt:
-  #     - no-new-privileges:true
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #     - "8080:8080"
-  #   dns:
-  #     - 10.218.0.2
-  #     - 1.1.1.1
-  #     - 1.0.0.1
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime:ro
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - ./traefik.yml:/traefik.yml:ro
-  #     - ./acme.json:/acme.json
-  #     - ./config.yml:/config.yml:ro
-  #   networks:
-  #     - blog_ghost_nw
-  #   environment:
-  #     - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi
-  #   restart: unless-stopped    
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.traefik.entrypoints=http"
-  #     - "traefik.http.routers.traefik.rule=Host(`traefik1.freelancingspot.com`)"
-  #     - "traefik.http.routers.traefik.service=traefik"
-  #     - "traefik.http.services.traefik.loadBalancer.server.url=http://localhost:8080"  
-  #     - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
-  #     - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
-  #     - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - $PWD/Caddyfile_vincent:/etc/caddy/Caddyfile #vincent
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - mysql
+  ghost:     
+    image: ghost:latest
+    container_name: ghost
+    hostname: ghost
+    volumes:
+      - ./ghost/config.production.json:/var/lib/ghost/config.production.json:z
+      - ghost_content:/var/lib/ghost/content
+    ports:
+      - "2368:2368"
+    environment: 
+      NODE_ENV: production
+      url: https://cryptotradinginfo.com
+      admin__url: https://cryptotradinginfo.com
+      database__client: mysql
+      database__connection__host: mysql
+      database__connection__user: itara
+      database__connection__port: 3306
+      database__connection__password: abcd@123
+      database__connection__database: ghostdata
+    restart: always
+    links:
+      - mysql
+    networks:
+      - ghost_nw
+      - mysql_nw
+    depends_on:
+      - mysql
 
-  #     - "traefik.http.routers.traefik-secure.entrypoints=https"
-  #     - "traefik.http.routers.traefik-secure.rule=Host(`traefik1.freelancingspot.com`)"
-  #     - "traefik.http.routers.traefik-secure.tls=true"
-  #     - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
-  #     - "traefik.http.routers.traefik-secure.tls.domains[0].main=freelancingspot.com"
-  #     - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.freelancingspot.com"
-  #     - "traefik.http.routers.traefik-secure.service=api@internal"
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    volumes:
+       - ghost_database:/var/lib/mysql:z
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=abcd@123
+      - MYSQL_DATABASE=ghostdata
+      - MYSQL_USER=itara
+      - MYSQL_PASSWORD=abcd@123
+    restart: always
+    networks:
+      - mysql_nw
 
-networks:
-  blog_ghost_nw:
-    external: true
 
 volumes:
+  ghost_content:
+  ghost_database:
   caddy_data:
   caddy_config:
+networks:
+  ghost_nw:
+  mysql_nw:
+
+
