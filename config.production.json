@@ -19,7 +19,7 @@
         }
     },
     "mail": {
-        "from": "'cryptotradinginfo' <info@cryptotradinginfo.com>",
+        "from": "'Cryptotradinginfo' <info@cryptotradinginfo.com>",
         "transport": "SMTP",
         "logger": true,
         "options": {
