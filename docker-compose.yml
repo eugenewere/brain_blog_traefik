@@ -15,7 +15,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./Caddyfile_vincent:/etc/caddy/Caddyfile #vincent
+      - $PWD/Caddyfile_vincent:/etc/caddy/Caddyfile #vincent
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
@@ -25,7 +25,7 @@ services:
     container_name: ghost
     hostname: ghost
     volumes:
-      - ./ghost/config.production.json:/var/lib/ghost/config.production.json:z
+      - ./config.production.json:/var/lib/ghost/config.production.json:z
       - ghost_content:/var/lib/ghost/content
     ports:
       - "2368:2368"
