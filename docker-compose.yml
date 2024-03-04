@@ -7,13 +7,16 @@ services:
     networks:
       - blog_ghost_nw
     environment:
-      - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi
-      - CF_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi
+      # - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi # brian
+      - CF_DNS_API_TOKEN=QbfvWvPPopGOzdJivhDd4zv3zfo-t4MSnN_Y-WxN  # vincent
+      # - CF_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi # brian
+      - CF_API_TOKEN=QbfvWvPPopGOzdJivhDd4zv3zfo-t4MSnN_Y-WxN  #vincent
     ports:
     - "80:80"
     - "443:443"
     volumes:
-    - $PWD/Caddyfile:/etc/caddy/Caddyfile
+    # - $PWD/Caddyfile:/etc/caddy/Caddyfile #brian
+    - $PWD/Caddyfile_vincent:/etc/caddy/Caddyfile #vincent
     - caddy_data:/data
     - caddy_config:/config
   # traefik:
