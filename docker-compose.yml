@@ -42,14 +42,13 @@ services:
       database__connection__port: 3306
       database__connection__password: abcd@123
       database__connection__database: ghostdata
-      mail__transport: SMTP
-      mail__options__service: Mailgun
-      mail__options__host: smtp.mailgun.org
+      mail__transport: "SMTP"
+      mail__options__service: "Mailgun"
+      mail__options__host: "smtp.mailgun.org"
       mail__options__port: 465
       mail__options__secure: true
-      mail__options__auth__user: postmaster@freelancingspot.com
-      mail__options__auth__pass: d71772d1cd9304115a37a31eab026ad4-f68a26c9-58e0f11d
-
+      mail__options__auth__user: "postmaster@freelancingspot.com"
+      mail__options__auth__pass: "d71772d1cd9304115a37a31eab026ad4-f68a26c9-58e0f11d"
 
 
     restart: always
