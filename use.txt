@@ -30,6 +30,21 @@ pass: 1234
     }
 }
 
+"mail": {
+    "from": "'Cryptotradinginfo' <info@cryptotradinginfo.com>",
+    "transport": "SMTP",
+    "logger": true,
+    "options": {
+        "host": "smtp.gmail.com",
+        "port": 587,
+        "secureConnection": false,
+        "auth": {
+            "user": "brianodhiambo377@gmail.com",
+            "pass": "ojnldizgsikurvuc"
+        }
+    }
+}
+
 
 www.freelancingspot.com  freelancingspot.com {
 	reverse_proxy http://ghost:2368
