@@ -1,3 +1,31 @@
 
 username: admin
 pass: 1234
+
+"mail": {
+  "transport": "SMTP",
+  "options": {
+    "service": "Mailgun",
+    "host": "smtp.mailgun.org",
+    "port": 465,
+    "secure": true,
+    "auth": {
+      "user": "postmaster@example.mailgun.org",
+      "pass": "1234567890"
+    }
+  }
+
+"mail": {
+    "from": "'Cryptotradinginfo' <info@cryptotradinginfo.com>",
+    "transport": "SMTP",
+    "logger": true,
+    "options": {
+        "host": "smtp.gmail.com",
+        "port": 587,
+        "secureConnection": false,
+        "auth": {
+            "user": "vincentodima19@gmail.com",
+            "pass": "hzofwwykhvyvhkpz"
+        }
+    }
+}

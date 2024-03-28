@@ -1,0 +1,35 @@
+{
+    "url": "freelancingspot.com",
+    "server": {
+        "port": 2368,
+        "host": "0.0.0.0"
+    },
+    "admin": {
+        "url": "https://freelancingspot.com"
+    },
+    "database": {
+        "client": "mysql",
+        "connection": {
+            "host": "mysql",
+            "port": 3306,
+            "user": "itara",
+            "password": "abcd@123",
+            "database": "ghostdata",
+            "charset": "utf8mb4"
+        }
+    },
+    "mail": {
+        "transport": "SMTP",
+        "options": {
+          "service": "Mailgun",
+          "host": "smtp.mailgun.org",
+          "port": 465,
+          "secure": true,
+          "auth": {
+            "user": "postmaster@freelancingspot.com",
+            "pass": "d71772d1cd9304115a37a31eab026ad4-f68a26c9-58e0f11d"
+          }
+        }
+      }
+
+}
