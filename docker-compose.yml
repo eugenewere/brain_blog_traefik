@@ -7,15 +7,16 @@ services:
     networks:
       - ghost_nw
     environment:
-      # - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi # brian
-      - CF_DNS_API_TOKEN=QbfvWvPPopGOzdJivhDd4zv3zfo-t4MSnN_Y-WxN  # vincent
-      # - CF_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi # brian
-      - CF_API_TOKEN=QbfvWvPPopGOzdJivhDd4zv3zfo-t4MSnN_Y-WxN  #vincent
+      - CF_DNS_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi # brian
+      # - CF_DNS_API_TOKEN=QbfvWvPPopGOzdJivhDd4zv3zfo-t4MSnN_Y-WxN  # vincent
+      - CF_API_TOKEN=AHSOtsBolgvFp0jxZpWae6iUiPou947MUEd_hBBi # brian
+      # - CF_API_TOKEN=QbfvWvPPopGOzdJivhDd4zv3zfo-t4MSnN_Y-WxN  #vincent
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - $PWD/Caddyfile_vincent:/etc/caddy/Caddyfile #vincent
+      # - $PWD/Caddyfile_vincent:/etc/caddy/Caddyfile #vincent
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile #vincent
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
@@ -31,8 +32,10 @@ services:
       - "2368:2368"
     environment: 
       NODE_ENV: production
-      url: https://cryptotradinginfo.com
-      admin__url: https://cryptotradinginfo.com
+      url: https://freelancingspot.com
+      admin__url: https://freelancingspot.com
+      # url: https://cryptotradinginfo.com
+      # admin__url: https://cryptotradinginfo.com
       database__client: mysql
       database__connection__host: mysql
       database__connection__user: itara
