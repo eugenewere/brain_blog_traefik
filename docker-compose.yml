@@ -26,7 +26,7 @@ services:
     container_name: ghost
     hostname: ghost
     volumes:
-      - "./configproductionbrian.json:/var/lib/ghost/config.production.json:z"
+      - "/home/brianodhiambo377/work/brain_blog_traefik/configproductionbrain.json:/var/lib/ghost/config.production.json:z"
       - "blog_ghost_content:/var/lib/ghost/content"
     ports:
       - "2368:2368"
