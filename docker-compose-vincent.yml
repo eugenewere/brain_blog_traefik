@@ -23,7 +23,7 @@ services:
     container_name: ghost
     hostname: ghost
     volumes:
-      - "blog_ghost_content:/var/lib/ghost/content"
+      - "brain_blog_traefik_ghost_content:/var/lib/ghost/content"
     ports:
       - "2368:2368"
     environment: 
@@ -68,7 +68,7 @@ services:
     image: mysql:8.0
     container_name: mysql
     volumes:
-       - blog_ghost_database:/var/lib/mysql:z
+       - brain_blog_traefik_ghost_database:/var/lib/mysql:z
     ports:
       - "3306:3306"
     environment:
@@ -82,9 +82,9 @@ services:
 
 
 volumes:
-  blog_ghost_content:
+  brain_blog_traefik_ghost_content:
     external: true
-  blog_ghost_database:
+  brain_blog_traefik_ghost_database:
     external: true
   caddy_data:
   caddy_config:
