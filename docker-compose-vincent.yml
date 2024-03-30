@@ -23,7 +23,7 @@ services:
     container_name: ghost
     hostname: ghost
     volumes:
-      - "brain_blog_traefik_ghost_content:/var/lib/ghost/content"
+      - "brain_blog_traefik_ghost_content2:/var/lib/ghost/content"
     ports:
       - "2368:2368"
     environment: 
@@ -82,7 +82,7 @@ services:
 
 
 volumes:
-  brain_blog_traefik_ghost_content:
+  brain_blog_traefik_ghost_content2:
     external: true
   brain_blog_traefik_ghost_database:
     external: true
