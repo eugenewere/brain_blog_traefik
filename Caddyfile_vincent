@@ -11,5 +11,5 @@ cryptotradinginfo.com {
 }
 
 www.cryptotradinginfo.com {
-    redir https://cryptotradinginfo.com
+    redir https://cryptotradinginfo.com{uri}
 }
