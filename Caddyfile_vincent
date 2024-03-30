@@ -2,7 +2,7 @@
 	email vincentodima19@gmail.com
 }
 
-cryptotradinginfo.com {
+www.cryptotradinginfo.com  cryptotradinginfo.com {
 	reverse_proxy http://ghost:2368
 	tls {
         dns cloudflare {env.CF_API_TOKEN}
@@ -10,6 +10,3 @@ cryptotradinginfo.com {
     }
 }
 
-www.cryptotradinginfo.com {
-    redir https://cryptotradinginfo.com
-}
