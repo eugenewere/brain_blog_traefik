@@ -1,7 +1,7 @@
 version: '2'
 services:
   caddy:
-    # image: caddy:2
+    container_name: caddy
     build: .
     restart: unless-stopped
     networks:
@@ -52,7 +52,7 @@ services:
       mail__options__port: 587
       mail__options__secureConnection: false
       mail__options__auth__user: "vincentodima19@gmail.com"
-      mail__options__auth__pass: "hzofwwykhvyvhkpz"
+      mail__options__auth__pass: "hcxcsjpwwfzwhkkj"
 
 
     restart: always
