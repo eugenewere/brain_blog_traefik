@@ -1,0 +1,95 @@
+version: '2'
+services:
+  caddy:
+    # image: caddy:2
+    build: .
+    restart: unless-stopped
+    networks:
+      - ghost_nw
+    environment:
+      - CF_DNS_API_TOKEN=QbfvWvPPopGOzdJivhDd4zv3zfo-t4MSnN_Y-WxN  # vincent
+      - CF_API_TOKEN=QbfvWvPPopGOzdJivhDd4zv3zfo-t4MSnN_Y-WxN  #vincent
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - $PWD/Caddyfile_vincent:/etc/caddy/Caddyfile #vincent
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - ghost
+  ghost:     
+    image: ghost:latest
+    container_name: ghost
+    hostname: ghost
+    volumes:
+      - "blog_ghost_content:/var/lib/ghost/content"
+    ports:
+      - "2368:2368"
+    environment: 
+      NODE_ENV: production
+      url: https://cryptotradinginfo.com
+      admin__url: https://cryptotradinginfo.com
+      database__client: mysql
+      database__connection__host: mysql
+      database__connection__user: itara
+      database__connection__port: 3306
+      database__connection__password: abcd@123
+      database__connection__database: ghostdata
+
+      # mail__transport: "SMTP"
+      # mail__options__service: "Mailgun"
+      # mail__options__host: "smtp.mailgun.org"
+      # mail__options__port: 465
+      # mail__options__secure: true
+      # mail__options__auth__user: "postmaster@freelancingspot.com"
+      # mail__options__auth__pass: "d71772d1cd9304115a37a31eab026ad4-f68a26c9-58e0f11d"
+
+      mail__transport: "SMTP"
+      mail__from:  "'info' <info@cryptotradinginfo.com>"
+      mail__logger: true
+      mail__options__host: "smtp.gmail.com"
+      mail__options__port: 587
+      mail__options__secureConnection: false
+      mail__options__auth__user: "vincentodima19@gmail.com"
+      mail__options__auth__pass: "hzofwwykhvyvhkpz"
+
+
+    restart: always
+    links:
+      - mysql
+    networks:
+      - ghost_nw
+      - mysql_nw
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    volumes:
+       - blog_ghost_database:/var/lib/mysql:z
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=abcd@123
+      - MYSQL_DATABASE=ghostdata
+      - MYSQL_USER=itara
+      - MYSQL_PASSWORD=abcd@123
+    restart: always
+    networks:
+      - mysql_nw
+
+
+volumes:
+  blog_ghost_content:
+    external: true
+  blog_ghost_database:
+    external: true
+  caddy_data:
+  caddy_config:
+networks:
+  ghost_nw:
+  mysql_nw:
+
+
